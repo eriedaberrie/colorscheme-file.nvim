@@ -38,3 +38,7 @@ require('colorscheme-file').setup {
     },
 }
 ```
+
+## Demo
+
+https://user-images.githubusercontent.com/64395218/204768215-65a3e72b-937d-4516-8f22-f744daceb5cf.mp4
