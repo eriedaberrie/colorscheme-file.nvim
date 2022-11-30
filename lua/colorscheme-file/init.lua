@@ -15,6 +15,12 @@ local notify = function(str, level)
 	vim.notify(str, level, { title = 'colorscheme-file' })
 end
 
+local set_colorscheme = function(colorscheme)
+	if colorscheme ~= vim.g.colors_name then
+		vim.cmd.colorscheme(colorscheme)
+	end
+end
+
 local read_file = function(fd)
 	local stat = uv.fs_fstat(fd)
 	if not stat then
@@ -33,7 +39,7 @@ end
 
 local set_fallback = function(colors_available)
 	if opts.fallback and vim.tbl_contains(colors_available, opts.fallback) then
-		vim.cmd.colorscheme(opts.fallback)
+		set_colorscheme(opts.fallback)
 		return true
 	end
 
@@ -60,7 +66,7 @@ M.set_colorscheme = function()
 	if alias then colorscheme = alias end
 
 	if vim.tbl_contains(colors_available, colorscheme) then
-		vim.cmd.colorscheme(colorscheme)
+		set_colorscheme(colorscheme)
 	else
 		notify(string.format('Colorscheme does not exist: %s', colorscheme))
 		return set_fallback(colors_available)
